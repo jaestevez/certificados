@@ -16,11 +16,11 @@ var generate_pdf = function(nombre, sex_type, cc, exp_cc, time_live_num, tel , d
     right: 72
   }});
   var stream = doc.pipe(blobStream());
-  var dir_resources = __dirname.substring(0,__dirname.indexOf('api')) + 'assets\\';
+  var dir_resources = __dirname.substring(0,__dirname.indexOf('api')) + 'assets/';
   doc.pipe(res);
 
-  doc.image(dir_resources + 'template_pdf\\header.png', 0, 0,{width: 620, height: 134});
-  doc.image(dir_resources + 'template_pdf\\logo.jpg', 40, 10,{width: 89, height: 90});
+  doc.image(dir_resources + 'template_pdf/header.png', 0, 0,{width: 620, height: 134});
+  doc.image(dir_resources + 'template_pdf/logo.jpg', 40, 10,{width: 89, height: 90});
   //max width:620
   doc.moveDown(6);
   var fecha = [new Date().getDate(), new Date().getMonth(), new Date().getFullYear()];
