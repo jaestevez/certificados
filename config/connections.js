@@ -24,7 +24,8 @@ module.exports.connections = {
     host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
     user: 'YOUR_MYSQL_USER',
     password: 'YOUR_MYSQL_PASSWORD',
-    database: 'YOUR_MYSQL_DB'
+    database: 'YOUR_MYSQL_DB',
+    ssl:true
   },
 
   /***************************************************************************
@@ -58,7 +59,8 @@ module.exports.connections = {
     port: '5432',
     user: 'jufbwswcikiisw',
     password: 'uAxvWidT5YdlWWy3GvMKrit0N_',
-    database: 'dehlh7ea33eg2r'
+    database: 'dehlh7ea33eg2r',
+    ssl:true
   }
 
 };

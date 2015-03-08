@@ -30,9 +30,9 @@
         </div>
         <div class="col-xs-3 col-sm-6 col-lg-6 ">
           <ul id="main-menu" class="nav nav-pills hidden-xs">
-            <li class="active"><a href="/">HOME</a></li>
-            <li><a href="/">VERIFICACIÓN</a></li>
-            <li><a href="/">ADMINISTRAR</a></li>
+            <li class="active"><a href="/">CONSULTAR</a></li>
+            <li><a href="/generate">GENERAR</a></li>
+            <li><a href="/admin">ADMINISTRAR</a></li>
           </ul>
           <a href="#" id="mobile-menu-button" class="btn btn-default visible-xs">
             <span class="glyphicon glyphicon-th-list"></span>
@@ -43,9 +43,9 @@
 
     <div class="visible-xs">
       <ul id="mobile-main-menu">
-        <li><a href="/">PRINCIPAL</a></li>
-        <li><a href="/">VERIFICACIÓN</a></li>
-        <li><a href="/">ADMINISTRAR</a></li>
+        <li><a href="/">CONSULTAR</a></li>
+        <li><a href="/generate">GENERAR</a></li>
+        <li><a href="/admin">ADMINISTRAR</a></li>
       </ul>
     </div>
   </header>
@@ -69,11 +69,26 @@
       var $mobileMenu = $('#mobile-main-menu');
       $mobileMenu.slideToggle('fast');
     }
-
+    function statedBotton()
+    {
+      var data_env = {data: $(this).attr('id')};
+      var $btn = $(this);
+      var $text_btn = (($btn.text() == 'no validar')?'validar':'no validar');
+      $btn.text($text_btn);
+        $.ajax({
+          url: "/admin",
+          type: "PUT",
+          data: data_env,
+          success: function(data, textStatus, jqxhr){
+            location.replace("/admin");
+          }
+        }); 
+    }
     $(document).ready(function() {
       $('#mobile-main-menu').hide();
-      $('#mobile-menu-button').on('click', toggleMobileMenu);
-    });
+      $('#mobile-menu-button').on('click', toggleMobileMenu);      
+      $('.stated-form').on('click', statedBotton); 
+    }); 
   </script>
   </body>
 </html>

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-lg-4 col-lg-offset-2 ">
+      <div id="form-groups" class="panel panel-default">
+        <div class="panel-heading"><b>Información Basica</b></div>
+          <div class="panel-body" >
+            <div class="form-group">
+              <label>Señor<%person.name == 'F' ? 'a': ''%></label>
+              <input class="form-control" value="<%= person.name%>" required="required" readonly>
+            </div>
+            <div class="form-group">
+              <label>Cedula</label>
+              <input name="cc" class="form-control" value=<%= person.cc%> required="required" readonly>
+            </div>
+            <div class="form-group">
+              <label>Tiempo(años)</label>
+              <input class="form-control" value=<%= person.time_live%> required="required" readonly>
+            </div>
+          </div>
+      </div>
+      <a href="/"><h5>Nueva Consulta</h5></a>
+      <hr>
+    </div>
+  </div>
+</div>

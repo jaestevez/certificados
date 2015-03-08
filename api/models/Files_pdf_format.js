@@ -16,6 +16,12 @@ module.exports = {
     id_person:{
       model: 'Person',
       required: true
+    },
+    validated:{
+      type: 'string',
+      enum: ['valido','no-valido'],
+      defaultsTo: 'no-valido',
+      required: true,
     }
   }
   /* Attribute methods

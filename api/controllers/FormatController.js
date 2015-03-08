@@ -52,11 +52,24 @@ module.exports = {
     });
   },
   form_cc: function (req, res) {
-    sails.models.person.findOne({cc:req.body.num_cel}).exec(function findOneCB(err,found) {
+    sails.models.person.findOne({cc:req.body.cc_query}).exec(function findOneCB(err,found) {
         if (found == undefined)
         res.send('No existe el usuario');
         else
           res.view('user_ex', {person:found});
+    });
+  },
+  query_cc: function (req, res) {
+    sails.models.files_pdf_format.findOne({name_file:req.body.id_format}).exec(function findOneCB(err,found_id) {
+      if (found_id == undefined)
+          res.send('No existe el usuario');
+      else
+        sails.models.person.findOne({cc:found_id.id_person}).exec(function findOneCB(err,found) {
+        if (found == undefined)
+        res.send('No existe el usuario');
+        else
+          res.view('person_info', {person:{cc:found.cc , name:found.name , time:found.time_live ,state:req.body.validated }});
+        });
     });
   },
   form_cc_id: function (req, res) {
@@ -95,7 +108,8 @@ module.exports = {
           var req_view = '';
           for (var i = 0; i < allTheStuff.length; i++) {
             req_view += allTheStuff[i].id_person + ': ' + allTheStuff[i].name_file;
-            req_view += ' fecha: ' + allTheStuff[i].date_file + "<br><hr>";
+            req_view += ' fecha: ' + allTheStuff[i].date_file ;
+            req_view += ' estado: ' + allTheStuff[i].validated + "<br><hr>";
           }
           text_request += req_view;
           callback(text_request);
