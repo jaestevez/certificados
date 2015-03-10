@@ -2,7 +2,7 @@ module.exports.routes = {
 
   'get /': {view: 'query'},
   'post /': 'FormatController.query_cc',
-  'get /generate':{view: 'homepage'},
+  'get /generate':'GenerateController.request',
   'get /admin':'AdminController.all_content',
   'put /admin':'AdminController.change_content',
   '/controller': 'FormatController.request',

@@ -14,10 +14,8 @@ module.exports = {
                 res.send(err);
             }
             req.logIn(user, function(err) {
-                if(err) res.send(err);
-                /*return res.send({
-                    message: 'login successful'
-                });*/
+                if(err) 
+                    res.send(err);
                 return res.redirect('/admin');
             });
         }) (req, res);

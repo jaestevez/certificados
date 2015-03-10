@@ -88,7 +88,7 @@ footer{
 h5{
   color: #3E68D5;
 }
-input{
+.input-uppercase{
   text-transform: uppercase;
 }
 
