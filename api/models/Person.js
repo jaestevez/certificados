@@ -29,7 +29,9 @@ module.exports = {
     },
     time_live: {
       type: 'integer',
-      required: true
+    },
+    time_date: {
+      type: 'date'
     },
     dir: {
       type: 'string',

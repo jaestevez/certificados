@@ -21,14 +21,24 @@
               <label>Telefono Fijo</label>
               <input class="form-control" value=<%= person.tel%> required="required" readonly>
             </div>
+            <% if(person.cel != null){ %>
             <div class="form-group">
               <label>Telefono Movil</label>
               <input class="form-control" value=<%= person.cel%> required="required" readonly>
             </div>
+            <% } %>
+            <% if(person.time_live != null){ %>
             <div class="form-group">
               <label>Tiempo(años)</label>
               <input class="form-control" value=<%= person.time_live%> required="required" readonly>
             </div>
+            <% } %>
+            <% if(person.time_date != null){ %>
+            <div class="form-group">
+              <label>Fecha</label>
+              <input class="form-control" value=<%= person.time_date%> required="required" readonly>
+            </div>
+            <% } %>
             <div class="form-group">
               <label>Dirección</label>
               <input class="form-control" value="<%= person.dir%>" required="required" readonly>
