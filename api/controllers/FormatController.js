@@ -20,16 +20,16 @@ module.exports = {
           if (req.body.tel_movil != '')
             numbers_tel += ', ' + req.body.tel_movil;
           var dir_file = id_found;
-          if(req.body.tiempo == '' && req.body.fecha == '')
+          if(req.body.tiempo == '' && req.body.fecha == '' && req.body.fecha_last == '')
             res.send('no hay fecha o tiempo');
-          if(req.body.tiempo != '' && req.body.fecha != '')
+          if(req.body.tiempo != '' && (req.body.fecha != '' || req.body.fecha_last != ''))
             res.send('llenar solo un campo de los siguientes,fecha o tiempo');
           if(req.body.fecha == '')
             pdf.generate_pdf(req.body.nombre, req.body.sexo_type == 'M', req.body.cedula, req.body.c_exp,
             req.body.tiempo, numbers_tel, req.body.dirc, dir_file, res);
           else{
             pdf.generate_pdf_version2(req.body.nombre, req.body.sexo_type == 'M', req.body.cedula, req.body.c_exp,
-            req.body.fecha, numbers_tel, req.body.dirc, dir_file, res);
+            req.body.fecha,req.body.fecha_last == '' ? null : req.body.fecha_last, numbers_tel, req.body.dirc, dir_file, res);
           }
           /*DataBase create person*/
           sails.models.person.create({
@@ -41,6 +41,7 @@ module.exports = {
             sex: req.body.sexo_type,
             time_live: req.body.tiempo == '' ? null : req.body.tiempo,
             time_date: req.body.fecha == '' ? null : req.body.fecha,
+            time_date_last: req.body.fecha_last == '' ? null : req.body.fecha_last,
             dir: req.body.dirc
           })
             .exec(function createCB(err, created) {
@@ -67,12 +68,23 @@ module.exports = {
         if (found == undefined)
         res.send('No existe el usuario');
         else{
-          var date_var = [found.time_date.getDate(), found.time_date.getMonth(), found.time_date.getFullYear()]
+          var date_var = [found.time_date.getDate(), found.time_date.getMonth(), found.time_date.getFullYear()];
+          date_var[1]++;
           if(String(date_var[0]).length < 2)
             date_var[0] = '0' + date_var[0];
           if(String(date_var[1]).length < 2)
             date_var[1] = '0' + date_var[1];
           found.time_date = date_var[0] + '/' + date_var[1] + '/' + date_var[2];
+          if(found.time_date_last != null){
+            var date_var_last = [found.time_date_last.getDate(), found.time_date_last.getMonth(), found.time_date_last.getFullYear()];
+            date_var_last[1]++;
+            if(String(date_var_last[0]).length < 2)
+            date_var_last[0] = '0' + date_var_last[0];
+            if(String(date_var_last[1]).length < 2)
+              date_var_last[1] = '0' + date_var_last[1];
+            found.time_date_last = date_var_last[0] + '/' + date_var_last[1] + '/' + date_var_last[2];
+          }
+          
           res.view('user_ex', {person:found});
         }
     });
@@ -101,16 +113,22 @@ module.exports = {
               numbers_tel += ', ' + found.cel;
             var dir_file = id_found;
             var date_struct = found.time_date.getFullYear() + '-' + 
-            ((String(found.time_date.getMonth()).length < 2)?'0'+parseInt(found.time_date.getMonth())+1:parseInt(found.time_date.getMonth())+1) 
+            ((String(found.time_date.getMonth()).length < 2)?'0' + (parseInt(found.time_date.getMonth()) + 1):parseInt(found.time_date.getMonth()) + 1) 
              + '-'+ ((String(found.time_date.getDate()).length < 2)?'0'+found.time_date.getDate():found.time_date.getDate());
-            /*console.log('date: '+found.time_date+'\n');
-            console.log('date: '+date_struct+'\n');*/
+             if(found.time_date_last != null){
+              var date_struct_last = found.time_date_last.getFullYear() + '-' + 
+              ((String(found.time_date_last.getMonth()).length < 2)?'0' + (parseInt(found.time_date_last.getMonth()) + 1):parseInt(found.time_date_last.getMonth()) + 1) 
+               + '-'+ ((String(found.time_date_last.getDate()).length < 2)?'0'+found.time_date_last.getDate():found.time_date_last.getDate());
+             }
+            console.log('date: '+found.time_date+'\n');
+            console.log('date: '+date_struct+'\n');
+            console.log('date: '+date_struct_last+'\n');
             if(found.time_date == '')
               pdf.generate_pdf(found.name, found.sex == 'M', found.cc, found.cc_exp,
               found.time_live, numbers_tel, found.dir, dir_file, res);
             else
               pdf.generate_pdf_version2(found.name, found.sex == 'M', found.cc, found.cc_exp,
-              date_struct, numbers_tel, found.dir, dir_file, res);
+              date_struct,date_struct_last, numbers_tel, found.dir, dir_file, res);
             sails.models.files_pdf_format.create({
               id_person: found.cc,
               name_file: dir_file,

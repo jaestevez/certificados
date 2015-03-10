@@ -62,7 +62,7 @@ var generate_pdf = function(nombre, sex_type, cc, exp_cc, time_live_num, tel , d
   });
   doc.end();
 };
-var generate_pdf_version2 = function(nombre, sex_type, cc, exp_cc, time_date, tel , dir_user,name_file,res){
+var generate_pdf_version2 = function(nombre, sex_type, cc, exp_cc, time_date,time_date_last, tel , dir_user,name_file,res){
   /*console.log('mes: '+ time_date);*/
   var doc = new PDFDocument({margins: {
     top: 50,
@@ -80,20 +80,25 @@ var generate_pdf_version2 = function(nombre, sex_type, cc, exp_cc, time_date, te
   doc.moveDown(6);
   var fecha = [new Date().getDate(), new Date().getMonth(), new Date().getFullYear()];
   var date_day = time_date.substring(8,10);
-  var date_month = time_date.substring(5,7); console.log('mes-pdf: ' + date_month);
+  var date_month = time_date.substring(5,7); 
   var date_year = time_date.substring(0,4);
   var month = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
   var title = "Bogotá D.C. "+month[fecha[1]] +" " +fecha[0] + " del " + fecha[2];
 
   var columna = "Se hace constar que " +
-    (sex_type?dep.sexo[0]:dep.sexo[1])  + nombre + ", identificad" + (sex_type?'o':'a') + " con C.C. No. " + cc + " de " + exp_cc +
-    ", reside en nuestro barrio desde  el " + date_day + " de " + month[parseInt(date_month) - 1] + " de " + date_year +
-    //", residio en nuestro barrio desde  el " + date_day + " de " + month[parseInt(date_month) - 1] + " de " + date_year +
-    //", reside en nuestro barrio desde  el " + date_day + " de Junio de " + date_year +
-    //" hasta 04 de agosto de 2011"+
+    (sex_type?dep.sexo[0]:dep.sexo[1])  + nombre + ", identificad" + (sex_type?'o':'a') + " con C.C. No. " + cc + " de " + exp_cc; 
+    if(time_date_last == null){
+    columna += ", reside en nuestro barrio desde  el " + date_day + " de " + month[parseInt(date_month) - 1] + " de " + date_year +
     ", tiempo en el cual ha demostrado ser una persona honorable, responsable y respetuosa en todas sus actividades personales.";
-    //", tiempo en el cual demostro ser una persona honorable, responsable y respetuosa en todas sus actividades personales.";
+    }else{
+      var date_day_last = time_date_last.substring(8,10);
+      var date_month_last = time_date_last.substring(5,7); 
+      var date_year_last = time_date_last.substring(0,4);
+      columna += ", residio en nuestro barrio desde  el " + date_day + " de " + month[parseInt(date_month) - 1] + " de " + date_year +
+      " hasta " + date_day_last + " de " + month[parseInt(date_month_last) - 1] + " de " + date_year_last +
+      ", tiempo en el cual demostro ser una persona honorable, responsable y respetuosa en todas sus actividades personales.";
+    }
 
   var direccion = "Con residencia en " + dir_user + ".";
   var telefono = "Tel. " + tel + ".";

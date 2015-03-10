@@ -15,6 +15,14 @@ module.exports.policies = {
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
+  
+  'AdminController': "authenticated",
+  UserAuthController: {
+    'create': true,
+  },
+  AuthController: {
+    '*': true,
+  }
 	// RabbitController: {
 
 		// Apply the `false` policy as the default for all of RabbitController's actions

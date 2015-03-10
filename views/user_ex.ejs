@@ -35,8 +35,14 @@
             <% } %>
             <% if(person.time_date != null){ %>
             <div class="form-group">
-              <label>Fecha</label>
+              <label>Fecha de Iniciación</label>
               <input class="form-control" value=<%= person.time_date%> required="required" readonly>
+            </div>
+            <% } %>
+            <% if(person.time_date_last != null){ %>
+            <div class="form-group">
+              <label>Fecha de Finalización</label>
+              <input class="form-control" value=<%= person.time_date_last%> required="required" readonly>
             </div>
             <% } %>
             <div class="form-group">

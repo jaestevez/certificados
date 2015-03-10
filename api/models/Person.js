@@ -33,6 +33,9 @@ module.exports = {
     time_date: {
       type: 'date'
     },
+    time_date_last: {
+      type: 'date'
+    },
     dir: {
       type: 'string',
       required: true
