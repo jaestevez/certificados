@@ -11,6 +11,18 @@
             <hr>
             </div>
             <% } %>
+            <table borde="0.5">
+                <tr>
+                    <td>nombre<td>
+                    <td>correo electronico<td>
+                </tr>
+                <% for(var i =0;i<data_i.length;i++) { %>
+                <tr>
+                    <td><%= data_i[i].name%><td>
+                    <td><%= data_i[i].email%><td>
+                </tr>
+                <% } %>
+            </table>
           </div>
       </div>
       <hr>
