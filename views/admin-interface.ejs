@@ -4,12 +4,12 @@
       <div id="form-groups" class="panel panel-default">
         <div class="panel-heading"><b>Usuario en la base de datos</b></div>
           <div class="panel-body" >
-            
-            <h3>DATA</h3>
-            <%= data_text %>
-            <% var data_i = [1,2,3,4,5]; %>
             <% for(var i =0;i<data_i.length;i++) { %>
-            <%= data_i[i]%>
+            <div class=form-group"> 
+            <label><%= data_i[i].name%><label>
+            <h3><%= data_i[i].email%>h3>
+            <hr>
+            </div>
             <% } %>
           </div>
       </div>
