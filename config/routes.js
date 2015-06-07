@@ -12,5 +12,7 @@ module.exports.routes = {
   '/query': 'FormatController.query',
   'get /login': 'LoginController.login',
   'post /login': 'LoginController.process',
-  'get /logout': 'LoginController.logout'
+  'get /logout': 'LoginController.logout',
+  //admin User API
+  'get /admin-user': 'AdminUsersController.adminIU'
 };
