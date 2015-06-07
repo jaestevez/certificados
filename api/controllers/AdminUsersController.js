@@ -10,10 +10,7 @@ module.exports = {
         });
     }
     queries_model(function(){
-      //return res.send(text_request);
       res.view('admin-interface', {data_i:request_view});
-      //res.view('admin-interface');
     });
-  	//res.view('homepage');
   }
 };
