@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-lg-4 col-lg-offset-2 ">
+      <div id="form-groups" class="panel panel-default">
+        <div class="panel-heading"><b>Usuario en la base de datos</b></div>
+          <div class="panel-body" >
+            <% for(var i=0;i<users_data.length; i++){ %>
+            <div class="form-group">
+              <label><%= users_data[i].name %></label>
+              <h3><%= users_data[i].email %></h3>
+            </div>
+            <hr>
+            <% } %>
+          </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-lg-4 col-lg-offset-2 ">
+            <form action="/newAdmin" method="post">
+                <div class="panel-body" >
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" name="email" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electronico:</label>
+                        <input type="text" name="email" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña:</label>
+                        <input type="password" name="password" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>ecriba nuevamente la contraseña:</label>
+                        <input type="password" name="re-password" required="required"/>
+                    </div>
+                    <div>
+                        <input type="submit" value="Crear" class="btn btn-success"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>    
+</div> 

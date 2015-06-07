@@ -12,14 +12,14 @@ module.exports = {
           }
           text_request += req_view;*/
           request_view = allTheStuff;
+          console.log(request_view);
           callback(request_view);
-          console.log(allTheStuff);
         });
     }
     queries_model(function(){
       //return res.send(text_request);
-      res.view('adminInterface', {users:request_view});
+      res.view('admin-interface', {users_data:request_view});
     });
-  	res.view('homepage');
+  	//res.view('homepage');
   }
 };
