@@ -14,5 +14,6 @@ module.exports.routes = {
   'post /login': 'LoginController.process',
   'get /logout': 'LoginController.logout',
   //admin User API
-  'get /admin-user': 'AdminUsersController.adminIU'
+  'get /admin-user': 'AdminUsersController.adminIU',
+  'post /newAdmin': 'AdminUsersController.addAdmin'
 };

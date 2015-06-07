@@ -12,5 +12,14 @@ module.exports = {
     queries_model(function(){
       res.view('admin-interface', {data_i:request_view});
     });
-  }
+  },
+  addAdmin: function (req, res) {
+  	sails.models.user.create({
+  	name:req.body.name,
+  	email:req.body.email,
+  	password:req.body.password
+  	}).exec(function createCB(err, created) {
+        if (err) console.log('error user admin insert\n' + err);
+    });
+    res.redirect('/admin-user');
 };
