@@ -5,7 +5,7 @@ module.exports = {
       sails.models.user.find()
         .exec(function (err, allTheStuff) {
           text_request = ' <div class="'+"form-group"+'"> ';
-          var req_view = '';
+          var req_view += '';
           for (var i = 0; i < allTheStuff.length; i++) {
             req_view += "<label> nombre: " + allTheStuff[i].name + '<label> <h3> correo electronico: ' + allTheStuff[i].email
             + "</h3> <hr> ";
@@ -17,8 +17,8 @@ module.exports = {
     }
     queries_model(function(){
       //return res.send(text_request);
-      //res.view('admin-interface', {data_embedded:request_view});
-      res.view('admin-interface');
+      res.view('admin-interface', {data_text:request_view});
+      //res.view('admin-interface');
     });
   	//res.view('homepage');
   }
