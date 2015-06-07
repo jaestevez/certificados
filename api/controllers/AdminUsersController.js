@@ -22,4 +22,5 @@ module.exports = {
         if (err) console.log('error user admin insert\n' + err);
     });
     res.redirect('/admin-user');
+	}
 };
