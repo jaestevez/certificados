@@ -7,7 +7,7 @@
 					<div class="container" >
 						<div class="col-xs-9 col-sm-8 col-lg-8 ">
 						<h4><%= formatos[i].cc + '  ' + formatos[i].name %></h4>
-						<h4><%= formatos[i].time_live + '  ' + formatos[i].date_file %></h4>
+						<h4><%= formatos[i].date_file %></h4>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-lg-3 ">
 						<button type="button" id="<%= formatos[i].name_file%>" class="btn btn-success stated-form"><% if(formatos[i].validated == 'validar'){%> no validar <%}else{%> validar<%}%></button>
