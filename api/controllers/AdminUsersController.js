@@ -12,12 +12,13 @@ module.exports = {
           }
           text_request += req_view;
           callback(text_request);*/
+          console.log(allTheStuff);
           res.view('adminInterface', {users:allTheStuff});
         });
     //}
     /*queries_model(function(){
       return res.send(text_request);
     });*/
-  	//res.view('homepage');
+  	res.view('homepage');
   }
 };
