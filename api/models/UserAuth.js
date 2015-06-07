@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+/*var bcrypt = require('bcrypt');
 
 module.exports = {
   attributes: {
@@ -36,3 +36,4 @@ module.exports = {
       });
   }
 };
+*/
