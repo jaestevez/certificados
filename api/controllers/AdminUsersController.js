@@ -21,6 +21,7 @@ module.exports = {
   	}).exec(function createCB(err, created) {
         if (err) console.log('error user admin insert\n' + err);
     });
+    console.log(req.body);
     res.redirect('/admin-user');
 	}
 };
