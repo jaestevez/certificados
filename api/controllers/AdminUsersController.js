@@ -1,7 +1,7 @@
 module.exports = {
   adminIU: function (req, res) {
   	text_request = 'Usuarios en el sistema: ';
-  	function queries_model(callback){
+  	//function queries_model(callback){
       sails.models.user.find()
         .exec(function (err, allTheStuff) {
           /*text_request += allTheStuff.length + '<br><br><hr>';
@@ -14,7 +14,7 @@ module.exports = {
           callback(text_request);*/
           res.view('adminInterface', {users:allTheStuff});
         });
-    }
+    //}
     /*queries_model(function(){
       return res.send(text_request);
     });*/
