@@ -15,5 +15,9 @@ module.exports.routes = {
   'get /logout': 'LoginController.logout',
   //admin User API
   'get /admin-user': 'AdminUsersController.adminIU',
-  'post /newAdmin': 'AdminUsersController.addAdmin'
+  'post /newAdmin': 'AdminUsersController.addAdmin',
+  //API for Backbone app
+  'get /registros': 'APIController.registros',
+  'put /registros': 'APIController.cambioEstado',
+  'delete /registros': 'APIController.eliminar'
 };
