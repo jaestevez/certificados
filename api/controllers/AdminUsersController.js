@@ -4,8 +4,7 @@ module.exports = {
   	function queries_model(callback){
       sails.models.user.find()
         .exec(function (err, allTheStuff) {
-          text_request = "
-          	<div class="form-group"> ";
+          text_request = " <div class=""form-group""> ";
           var req_view = '';
           for (var i = 0; i < allTheStuff.length; i++) {
             req_view += "<label> nombre: " + allTheStuff[i].name + '<label> <h3> correo electronico: ' + allTheStuff[i].email
