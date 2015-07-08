@@ -68,13 +68,16 @@ module.exports = {
         if (found == undefined)
         res.send('No existe el usuario');
         else{
-          var date_var = [found.time_date.getDate(), found.time_date.getMonth(), found.time_date.getFullYear()];
+            var date_var = null;
+            if(found.time_date != null){
+            date_var = [found.time_date.getDate(), found.time_date.getMonth(), found.time_date.getFullYear()];
           date_var[1]++;
           if(String(date_var[0]).length < 2)
             date_var[0] = '0' + date_var[0];
           if(String(date_var[1]).length < 2)
             date_var[1] = '0' + date_var[1];
           found.time_date = date_var[0] + '/' + date_var[1] + '/' + date_var[2];
+            }
           if(found.time_date_last != null){
             var date_var_last = [found.time_date_last.getDate(), found.time_date_last.getMonth(), found.time_date_last.getFullYear()];
             date_var_last[1]++;
