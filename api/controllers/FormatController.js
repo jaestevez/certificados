@@ -113,7 +113,7 @@ module.exports = {
               numbers_tel += ', ' + found.cel;
             var dir_file = id_found;
             var date_struct = null;
-            if(found.time_date){
+            if(found.time_date == undefined){
             date_struct = found.time_date.getFullYear() + '-' + 
             ((String(found.time_date.getMonth()).length < 2)?'0' + (parseInt(found.time_date.getMonth()) + 1):parseInt(found.time_date.getMonth()) + 1) 
              + '-'+ ((String(found.time_date.getDate()).length < 2)?'0'+found.time_date.getDate():found.time_date.getDate());
@@ -123,7 +123,7 @@ module.exports = {
                + '-'+ ((String(found.time_date_last.getDate()).length < 2)?'0'+found.time_date_last.getDate():found.time_date_last.getDate());
              }
              }
-            console.log('date: '+found.time_date+'\n');
+            //console.log('date: '+found.time_date+'\n');
             console.log('date: '+date_struct+'\n');
             console.log('date: '+date_struct_last+'\n');
             if(found.time_date == '')
