@@ -116,7 +116,7 @@ module.exports = {
               numbers_tel += ', ' + found.cel;
             var dir_file = id_found;
             var date_struct = null;
-            if(found.time_date == undefined){
+            if(found.time_date != null){
             date_struct = found.time_date.getFullYear() + '-' + 
             ((String(found.time_date.getMonth()).length < 2)?'0' + (parseInt(found.time_date.getMonth()) + 1):parseInt(found.time_date.getMonth()) + 1) 
              + '-'+ ((String(found.time_date.getDate()).length < 2)?'0'+found.time_date.getDate():found.time_date.getDate());
