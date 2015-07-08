@@ -112,13 +112,16 @@ module.exports = {
             if (found.cel != null)
               numbers_tel += ', ' + found.cel;
             var dir_file = id_found;
-            var date_struct = found.time_date.getFullYear() + '-' + 
+            var date_struct = null;
+            if(found.time_date){
+            date_struct = found.time_date.getFullYear() + '-' + 
             ((String(found.time_date.getMonth()).length < 2)?'0' + (parseInt(found.time_date.getMonth()) + 1):parseInt(found.time_date.getMonth()) + 1) 
              + '-'+ ((String(found.time_date.getDate()).length < 2)?'0'+found.time_date.getDate():found.time_date.getDate());
              if(found.time_date_last != null){
               var date_struct_last = found.time_date_last.getFullYear() + '-' + 
               ((String(found.time_date_last.getMonth()).length < 2)?'0' + (parseInt(found.time_date_last.getMonth()) + 1):parseInt(found.time_date_last.getMonth()) + 1) 
                + '-'+ ((String(found.time_date_last.getDate()).length < 2)?'0'+found.time_date_last.getDate():found.time_date_last.getDate());
+             }
              }
             console.log('date: '+found.time_date+'\n');
             console.log('date: '+date_struct+'\n');
