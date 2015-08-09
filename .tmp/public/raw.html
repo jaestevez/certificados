@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Raw</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	</head>
+	<body>
+		<h2>RAW content</h2>
+        <div id="forms" style="background-color:#eee;">
+      </div>
+        <div id="stage" style="background-color:#eee;">
+      </div>
+        <input type="button" id="driver" value="Load Data" />
+        <script type="text/javascript">
+            var index_formats = 0;
+            var data_block = 3;//bloque de datos
+            $("#driver").click(function(event){
+            /*$.getJSON('/registros', function(jd) {
+                jd = jd[1];
+                if(jd == null || jd == undefined)
+                    $('#stage').append('<p> Not Data</p>');
+                else{
+                  $('#stage').html('<p> Name: ' + jd.name + '</p>');
+                    $('#stage').append('<p>Age : ' + jd.cc+ '</p>');
+                    $('#stage').append('<p> Sex: ' + jd.date_file+ '</p>');
+                }
+               });*/
+                $.ajax({
+                    url: '/registros',
+                    type: 'GET',
+                    data: 'start='+index_formats+'&end='+(index_formats+data_block), // or $('#myform').serializeArray()
+                    success: function(data) {
+                        var persona = data[0];
+                        var txt ='';
+                        for(var i = 0;i<data_block;i++){
+                            txt += "<div><h2>"+data[i].name+"</h2><h3>"+data[i].date_file
+                            +"</h3></div>";
+                        }
+                        $('#forms').append(txt);
+                        index_formats += data_block;
+                    }
+                });
+            });
+                
+        </script>
+	</body>
+</html>
+
