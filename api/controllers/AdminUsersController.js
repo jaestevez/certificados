@@ -5,7 +5,7 @@ module.exports = {
       sails.models.user.find()
         .exec(function (err, allTheStuff) {
           request_view = allTheStuff;
-          console.log(request_view);
+          //console.log(request_view);
           callback(request_view);
         });
     }
@@ -21,7 +21,7 @@ module.exports = {
   	}).exec(function createCB(err, created) {
         if (err) console.log('error user admin insert\n' + err);
     });
-    console.log(req.body);
+    //console.log(req.body);
     res.redirect('/admin-user');
 	}
 };

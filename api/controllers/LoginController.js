@@ -16,14 +16,13 @@ module.exports = {
             req.logIn(user, function(err) {
                 if(err) 
                     res.send(err);
-                return res.redirect('/admin');
+                return res.redirect(req.baseUrl);
             });
         }) (req, res);
     },
 
     logout: function(req, res) {
         req.logOut();
-        //res.send('logout successful');
         res.redirect('/');
     }
 };

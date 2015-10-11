@@ -127,8 +127,8 @@ module.exports = {
              }
              }
             //console.log('date: '+found.time_date+'\n');
-            console.log('date: '+date_struct+'\n');
-            console.log('date: '+date_struct_last+'\n');
+            //console.log('date: '+date_struct+'\n');
+            //console.log('date: '+date_struct_last+'\n');
             if(found.time_date == '' || found.time_date == undefined)
               pdf.generate_pdf(found.name, found.sex == 'M', found.cc, found.cc_exp,
               found.time_live, numbers_tel, found.dir, dir_file, res);
