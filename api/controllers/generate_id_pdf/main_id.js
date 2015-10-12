@@ -7,7 +7,9 @@ var generateId = function(){
       if(found[i].state_reserved == 'no asignado')
       assig++;
     }
-    console.log("numero: "+found.length+" num: "+assig+"\n");
+    //console.log("numero: "+found.length+" num: "+assig+"\n");
+    var news_code = new Array(15);
+    var new_code_i = 0;
     if(assig <10){
       var iterator= 0;
       while(iterator <(15-assig)){
@@ -19,8 +21,16 @@ var generateId = function(){
               break;
             }
         }
+        for(var i = 0;i<new_code_i;i++){
+            if(news_code[i] == id){
+              state = true;
+              break;
+            }
+        }
         if(!state){
           sails.models.id_reserved.create({name_reserved:id,stated_reserved:'no asignado'}).exec(function createCB(err,created){});
+          news_code[new_code_i] = id;
+          new_code_i++;
           iterator++;
         }
       }
@@ -37,6 +47,7 @@ var assignId = function(impl,req,res){
     console.log("error reserva de id\n");
   });
 };
+//version anterior
 var generateId_v0_9 = function(){
   sails.models.id_reserved.find({state_reserved:'no asignado'}).exec(function findOneCB(err,found){
     console.log("nuemro de ids reservados asignados: "+found.length+"\n");
