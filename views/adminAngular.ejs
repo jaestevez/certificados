@@ -1,0 +1,62 @@
+<div class="container" ng-controller="listarController">
+	<h2>CERTIFICADOS GENERADOS</h2>
+	<div class="row" ng-repeat="registro in listaRegistro ">
+		<div class="col-xs-11 col-xs-offset-1 col-sm-11 col-sm-offset-1 col-lg-11 col-lg-offset-1 ">
+			<div class="list-group" >
+				<div class="list-group-item ">
+					<div class="container" >
+						<div class="col-xs-9 col-sm-8 col-lg-8 ">
+						<h4>{{registro.name}}    CC.{{registro.cc}}</h4>
+						<h4>Fecha de registro: {{registro.date_file | formatDate}}</h4>
+						</div>
+						<div class="col-xs-3 col-sm-3 col-lg-3 ">
+							<span>{{registro.validated | estado}}</span>
+						<button type="button" ng-click="cambiarEstado($index);" class="btn btn-success stated-form">Cambiar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var appCertificados = angular.module('certificados',['ngResource']);
+	appCertificados.config(['$resourceProvider', function($resourceProvider) {
+  	$resourceProvider.defaults.stripTrailingSlashes = false;
+	}]);
+	appCertificados.controller('listarController',['$scope','$resource',function($scope,$resource){
+		$scope.listaRegistro = [];
+		var User = $resource('/registros');
+		User.query({}, function(data) {
+			$scope.listaRegistro = data;
+		});
+	$scope.cambiarEstado = function(parmtr){
+		var data_env = {data: $scope.listaRegistro[parmtr].name_file};
+		$scope.listaRegistro[parmtr].validated = (($scope.listaRegistro[parmtr].validated == 'validar')?'no validar':'validar');
+			$.ajax({
+				url: "/admin",
+				type: "PUT",
+				data: data_env,
+				success: function(data, textStatus, jqxhr){}});
+		};
+}]);
+appCertificados.filter('formatDate',function(){
+		return function(text) {
+        if(text != null){
+            return text.substring(0,10);
+						//return text;
+        }
+    }
+});
+appCertificados.filter('estado',function(){
+		return function(text) {
+        if(text != null){
+					if(text == "no validar" || text == "no-valido")
+						return "sin validacion";
+					if(text == "validar")
+						return "validado";
+          return "";
+        }
+    }
+});
+</script>

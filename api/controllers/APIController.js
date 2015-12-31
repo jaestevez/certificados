@@ -4,8 +4,8 @@ module.exports = {
       console.log(req.query);
       if(!req.query.start || !req.query.end){
   	sails.models.files_pdf_format.query('SELECT cc,name,time_live,date_file,validated,name_file FROM files_pdf_format f,person p where f.id_person = p.cc ',function(err, results) {
-		if (err) return res.serverError(err);
-            console.log('numb 1');
+		  if (err) return res.serverError(err);
+      console.log('numb 1');
 			res.send(results.rows);
 		});
       }else{
@@ -25,5 +25,12 @@ module.exports = {
   },
   eliminar: function (req, res){
   	res.send("{res:'eliminar registro'}");
+  },
+  traer: function (req,res){
+    sails.models.files_pdf_format.query('SELECT cc,name,time_live,date_file,validated,name_file' +
+    ' FROM files_pdf_format f,person p where f.id_person = p.cc',function(err, results) {
+		  if (err) return res.serverError(err);
+			res.json(200,results.rows);
+		});
   }
 };

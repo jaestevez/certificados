@@ -3,7 +3,8 @@ module.exports.routes = {
   'get /': {view: 'query'},
   'post /': 'FormatController.query_cc',
   'get /generate':'GenerateController.request',
-  'get /admin':'AdminController.all_content',
+  //'get /admin':'AdminController.all_content',
+  'get /admin':'AdminController.viewAdminAngular',
   'put /admin':'AdminController.change_content',
   '/controller': 'FormatController.request',
   'post /form': 'FormatController.form',
@@ -19,5 +20,6 @@ module.exports.routes = {
   //API for Backbone app
   'get /registros': 'APIController.registros',
   'put /registros': 'APIController.cambioEstado',
-  'delete /registros': 'APIController.eliminar'
+  'delete /registros': 'APIController.eliminar',
+  'get /traer': 'APIController.traer'
 };

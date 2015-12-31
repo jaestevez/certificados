@@ -1,7 +1,7 @@
 var passport = require('passport');
 
 module.exports = {
-    
+
     login: function(req, res) {
         res.view('login');
     },
@@ -14,8 +14,9 @@ module.exports = {
                 res.send(err);
             }
             req.logIn(user, function(err) {
-                if(err) 
+                if(err)
                     res.send(err);
+                    console.log(req.body);
                 return res.redirect(req.baseUrl);
             });
         }) (req, res);
