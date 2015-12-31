@@ -13,6 +13,7 @@ module.exports = {
 		sails.models.files_pdf_format.findOne({name_file:req.body.data}).exec(function findOneCB(err,found_id) {
 			sails.models.files_pdf_format.query("update files_pdf_format set validated='" + ((found_id.validated == 'validar')?'no validar':'validar') +"' where name_file ='"+ req.body.data+"'",function(err, results) {
 				res.send('ok data');
+				console.log('transaccion finalizada');
 			});
 		});
 	},

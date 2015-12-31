@@ -16,7 +16,6 @@ module.exports = {
             req.logIn(user, function(err) {
                 if(err)
                     res.send(err);
-                    console.log(req.body);
                 return res.redirect(req.baseUrl);
             });
         }) (req, res);

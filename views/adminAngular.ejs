@@ -1,6 +1,7 @@
 <div class="container" ng-controller="listarController">
 	<h2>CERTIFICADOS GENERADOS</h2>
-	<div class="row" ng-repeat="registro in listaRegistro ">
+	<input type="text" value="busqueda" ng-model="searchPattern" style="margin-left:85%;width:15%;">
+	<div class="row" ng-repeat="registro in listaRegistro | filter:searchPattern">
 		<div class="col-xs-11 col-xs-offset-1 col-sm-11 col-sm-offset-1 col-lg-11 col-lg-offset-1 ">
 			<div class="list-group" >
 				<div class="list-group-item ">
@@ -8,10 +9,14 @@
 						<div class="col-xs-9 col-sm-8 col-lg-8 ">
 						<h4>{{registro.name}}    CC.{{registro.cc}}</h4>
 						<h4>Fecha de registro: {{registro.date_file | formatDate}}</h4>
+						<div>
+							<button type="button" ng-init="registro.showNameFile=false" ng-click="cambiarEstadoButton(registro.name_file);" class="btn btn-success" style="padding: 5px 10px;margin-left:0px;">{{registro.showNameFile | mostrrOcltr}}</button>
+						</div>
+						<h5 ng-show="registro.showNameFile">{{registro.name_file}}</h5>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-lg-3 ">
 							<span>{{registro.validated | estado}}</span>
-						<button type="button" ng-click="cambiarEstado($index);" class="btn btn-success stated-form">Cambiar</button>
+						<button type="button" ng-click="cambiarEstado(registro.name_file);" class="btn btn-success stated-form">Cambiar</button>
 						</div>
 					</div>
 				</div>
@@ -28,16 +33,33 @@
 		$scope.listaRegistro = [];
 		var User = $resource('/registros');
 		User.query({}, function(data) {
+			for (var i=0;i<$scope.listaRegistro.length;i++){
+				$scope.listaRegistro[i].showNameFile=false;
+			}
 			$scope.listaRegistro = data;
 		});
 	$scope.cambiarEstado = function(parmtr){
-		var data_env = {data: $scope.listaRegistro[parmtr].name_file};
-		$scope.listaRegistro[parmtr].validated = (($scope.listaRegistro[parmtr].validated == 'validar')?'no validar':'validar');
+		var data_env = {data: parmtr};
+		for (var i=0;i<$scope.listaRegistro.length;i++){
+			if($scope.listaRegistro[i].name_file == parmtr){
+					$scope.listaRegistro[i].validated = (($scope.listaRegistro[i].validated == 'validar')?'no validar':'validar');
+					break;
+			}
+		}
+		//$scope.listaRegistro[parmtr].validated = (($scope.listaRegistro[parmtr].validated == 'validar')?'no validar':'validar');
 			$.ajax({
 				url: "/admin",
 				type: "PUT",
 				data: data_env,
 				success: function(data, textStatus, jqxhr){}});
+		};
+		$scope.cambiarEstadoButton = function(parmtr){
+			for (var i=0;i<$scope.listaRegistro.length;i++){
+				if($scope.listaRegistro[i].name_file == parmtr){
+					$scope.listaRegistro[i].showNameFile = !($scope.listaRegistro[i].showNameFile);
+					break;
+				}
+			}
 		};
 }]);
 appCertificados.filter('formatDate',function(){
@@ -57,6 +79,17 @@ appCertificados.filter('estado',function(){
 						return "validado";
           return "";
         }
+    }
+});
+appCertificados.filter('mostrrOcltr',function(){
+		return function(text) {
+        if(text != null){
+					if(text)
+						return "ocultar id certificado";
+					else
+						return "mostrar id certificado";
+        }
+//				return "mostrar";
     }
 });
 </script>
